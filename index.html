@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Training and Evaluating Diffusion Policies with Long Context Lengths</title>
+  <meta name="description" content="Benchmarking and training diffusion policies for imitation learning across short-to-long context lengths." />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Training and Evaluating Diffusion Policies with Long Context Lengths" />
+  <meta property="og:description" content="Benchmarking and training diffusion policies for imitation learning across short-to-long context lengths." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dp-with-long-context.github.io/" />
+  <link rel="canonical" href="https://dp-with-long-context.github.io/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Under-construction banner -->
+  <div class="construction-banner" role="status">
+    <span class="construction-icon">🚧</span>
+    <span>Website under construction &mdash; videos, plots, and code coming soon</span>
+    <span class="construction-icon">🚧</span>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <h1 class="title"><span class="title-line">Training and Evaluating Diffusion Policies</span> <span class="title-line">with Long Context Lengths</span></h1>
+
+      <div class="authors">
+        <span class="author">Abhinav Agarwal<sup>*</sup></span>
+        <span class="author">Adam Wei<sup>&dagger;</sup></span>
+        <span class="author">Taylan Kargin<sup>&dagger;</sup></span>
+        <span class="author">Michael Zeng</span>
+        <span class="author">Cole Becker</span>
+        <span class="author">Arif Kerem Day&#305;</span>
+        <span class="author">Pablo Parrilo</span>
+        <span class="author">Asuman Ozdaglar</span>
+        <span class="author">Russ Tedrake</span>
+      </div>
+
+      <div class="affiliations">
+        <span>Massachusetts Institute of Technology</span>
+      </div>
+
+      <div class="footnote">
+        <sup>*</sup> Corresponding author &nbsp;&middot;&nbsp; <sup>&dagger;</sup> Equal contribution
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="abstract">
+      <h2>Abstract</h2>
+      <p>
+        Imitation learning has enabled highly-dexterous robotic manipulation from RGB
+        observations. Policies trained with these methods, however, typically condition
+        robot actions on only a short history of observations. These policies cannot solve
+        tasks that require memory and can get stuck repeatedly executing the same failing
+        motions. In this work, we first benchmark policy performance as context length is
+        incrementally increased from short to long, across a spectrum of tasks with varying
+        local stability and memory requirements, and in multiple data regimes. To our
+        knowledge, this is the first study to investigate context length in imitation
+        learning at this level of detail. Our results challenge prior claims: naively scaling
+        context length is not as brittle as advertised in literature. With an appropriate
+        conditioning method and denoising backbone (UNet&nbsp;+&nbsp;Cross-Attention),
+        single-task policies achieve high success rates on many tasks in the usual data
+        regime even with naive scaling. Next, we propose a training algorithm to jointly
+        train policies at multiple context lengths, further reducing the sample complexity
+        of long-context learning. Finally, we apply our findings to re-evaluate some
+        previously proposed solutions to long-context imitation learning.
+      </p>
+    </section>
+
+    <section class="hero-video">
+      <div class="video-frame">
+        <video controls autoplay loop muted playsinline preload="metadata" poster="videos/placeholder.svg">
+          <source src="videos/hardware_2.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 The Authors &middot; Massachusetts Institute of Technology</p>
+    </div>
+  </footer>
+</body>
+</html>
