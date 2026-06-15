@@ -77,7 +77,7 @@
 
     <section class="hero-video">
       <div class="video-frame">
-        <video controls autoplay loop muted playsinline preload="metadata" poster="videos/placeholder.svg">
+        <video autoplay loop muted playsinline preload="metadata" poster="videos/placeholder.svg">
           <source src="videos/hardware_2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -90,5 +90,16 @@
       <p>&copy; 2026 The Authors &middot; Massachusetts Institute of Technology</p>
     </div>
   </footer>
+
+  <script>
+    // Site policy: every video is permanently muted with no unmute control.
+    // Strip native controls (the only unmute UI) and force-mute as a backstop.
+    document.querySelectorAll('video').forEach(function (v) {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.removeAttribute('controls');
+      v.addEventListener('volumechange', function () { if (!v.muted) v.muted = true; });
+    });
+  </script>
 </body>
 </html>
