@@ -92,13 +92,49 @@
   </footer>
 
   <script>
-    // Site policy: every video is permanently muted with no unmute control.
-    // Strip native controls (the only unmute UI) and force-mute as a backstop.
+    // Site policy: videos are muted with NO unmute option, but get custom controls
+    // (play/pause + seek scrubber). We avoid native controls because browsers can't
+    // hide only the volume control, and force-mute as a backstop.
+    var PLAY = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
+    var PAUSE = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+
     document.querySelectorAll('video').forEach(function (v) {
       v.muted = true;
       v.defaultMuted = true;
       v.removeAttribute('controls');
       v.addEventListener('volumechange', function () { if (!v.muted) v.muted = true; });
+
+      var bar = document.createElement('div');
+      bar.className = 'video-controls';
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'vc-btn';
+      btn.setAttribute('aria-label', 'Play or pause');
+      function syncBtn() { btn.innerHTML = v.paused ? PLAY : PAUSE; }
+      btn.addEventListener('click', function () { v.paused ? v.play() : v.pause(); });
+      v.addEventListener('play', syncBtn);
+      v.addEventListener('pause', syncBtn);
+
+      var seek = document.createElement('input');
+      seek.type = 'range';
+      seek.className = 'vc-seek';
+      seek.min = 0; seek.max = 1000; seek.value = 0;
+      seek.setAttribute('aria-label', 'Seek');
+      var scrubbing = false;
+      seek.addEventListener('input', function () {
+        if (v.duration) v.currentTime = (seek.value / 1000) * v.duration;
+      });
+      seek.addEventListener('pointerdown', function () { scrubbing = true; });
+      window.addEventListener('pointerup', function () { scrubbing = false; });
+      v.addEventListener('timeupdate', function () {
+        if (!scrubbing && v.duration) seek.value = (v.currentTime / v.duration) * 1000;
+      });
+
+      bar.appendChild(btn);
+      bar.appendChild(seek);
+      v.parentElement.appendChild(bar);
+      syncBtn();
     });
   </script>
 </body>
