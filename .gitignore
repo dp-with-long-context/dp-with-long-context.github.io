@@ -1,0 +1,9 @@
+# Never commit paper LaTeX source or archives
+*.tar.gz
+*.zip
+*.tex
+*.bib
+paper-latex-src/
+latex/
+# OS cruft
+.DS_Store
